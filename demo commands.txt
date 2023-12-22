@@ -1,0 +1,90 @@
+# query GetAllUsers {
+#   users {
+#     name
+#     id
+#     age
+#     nationality
+#     username
+#     friends {
+#       name
+#     }
+#   }
+# }
+
+# query GetUser($userId: ID!) {
+#   user(id: $userId) {
+#     name
+#     age
+#     nationality
+#     friends {
+#       name
+#       age
+#     }
+#     favoriteMovies {
+#       name
+#       release
+#     }
+#   }
+# }
+
+# query GetAllMovies {
+#   movies {
+#     name
+#     release
+#     isInTheaters
+#   }
+# }
+
+# query getMovie($name: String!) {
+#   movie(name: $name) {
+#     name
+#     release
+#     isInTheaters
+#   }
+# }
+
+# mutation CreateUser($input: CreateUserInput!){
+#   createUser(input: $input) {
+#     id
+#     name
+#     age
+
+#   }
+# }
+
+# mutation updatedUsername($input: updateUsername!) {
+#   updateUsername(input: $input) {
+#     id
+#     username
+#   }
+# }
+
+# mutation deleteUser($input: deleteUser!) {
+#   deleteUser(input: $input) {
+#     id
+#     username
+#     friends {
+#       name
+#     }
+#   }
+# }
+
+fragment getAgeAndName on User {
+  name
+  age
+}
+
+query ExampleQuery {
+  users {
+    ...on UsersSuccessfulResult{
+      users{
+        id
+        name
+        age
+      }
+    }
+    ...on UsersErrorResult{
+      message
+    }
+  }
+}
